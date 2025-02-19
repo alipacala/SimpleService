@@ -8,5 +8,5 @@ public class AuditLog
   public DateTime EntityModifiedAt { get; private set; } = DateTime.UtcNow;
   public Guid EntityModifiedBy { get; set; } = Guid.Empty;
 
-  public IEnumerable<AuditLogDetail> Details { get; private set; } = new List<AuditLogDetail>();
+  public IEnumerable<AuditLogDetail> Details { get; set; } = new List<AuditLogDetail>();
 }

@@ -1,14 +1,30 @@
 using Microsoft.EntityFrameworkCore;
+using SimpleService.Application.Common.Interfaces.Services;
+using SimpleService.Application.Services;
 using SimpleService.Infrastructure.Data;
+using Wolverine;
+using Wolverine.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddApiServices();
+builder.Services.AddAuthorization();
+
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-builder.Services.AddControllers();
+builder.Host.UseWolverine(opts =>
+{
+    opts.UseEntityFrameworkCoreTransactions();
+    opts.Policies.AutoApplyTransactions();
+    opts.Durability.Mode = DurabilityMode.Solo;
+
+    opts.Discovery.IncludeAssembly(typeof(ListarPersonasQueryHandler).Assembly);
+});
+
+builder.Services.AddApiServices(typeof(Program).Assembly);
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddEndpoints(typeof(Program).Assembly);
 
 var app = builder.Build();
 
@@ -30,6 +46,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapEndpoints();
 
 app.Run();

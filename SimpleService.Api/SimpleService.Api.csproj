@@ -13,6 +13,8 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+    <PackageReference Include="WolverineFx.EntityFrameworkCore" Version="3.9.1" />
+    <PackageReference Include="WolverineFx.Http" Version="3.9.1" />
   </ItemGroup>
 
   <ItemGroup>
