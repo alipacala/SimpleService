@@ -1,27 +1,17 @@
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SimpleService.Application.Common.Interfaces.Services;
+using SimpleService.Application.Services;
 
 namespace Microsoft.Extensions.DependencyInjection;
 public static class DependencyInjection
 {
-  public static IServiceCollection AddApiServices(this IServiceCollection services, Assembly assembly)
-{
-    var serviceTypes = assembly.GetTypes()
-        .Where(t => t.IsClass && !t.IsAbstract) // Solo clases concretas
-        .SelectMany(t => t.GetInterfaces(), (impl, iface) => new { impl, iface })
-        .Where(t => t.iface.IsGenericType && t.iface.GetGenericTypeDefinition() == typeof(IService<>))
-        .ToList();
-
-    foreach (var serviceType in serviceTypes)
-    {
-        Console.WriteLine($"Registrando: {serviceType.impl.Name} como {serviceType.iface.Name}");
-
-        services.AddScoped(serviceType.iface, serviceType.impl); // Registro directo sin reflexión extra
-    }
+  public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+  {
+    services.AddScoped<IPersonaService, PersonaService>();
 
     return services;
-}
+  }
 
   public static IServiceCollection AddEndpoints(
     this IServiceCollection services,

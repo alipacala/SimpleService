@@ -20,7 +20,7 @@ builder.Host.UseWolverine(opts =>
     opts.Discovery.IncludeAssembly(typeof(ListarPersonasQueryHandler).Assembly);
 });
 
-builder.Services.AddApiServices(typeof(Program).Assembly);
+builder.Services.AddApplicationServices();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
