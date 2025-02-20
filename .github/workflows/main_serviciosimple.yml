@@ -23,6 +23,23 @@ jobs:
         with:
           dotnet-version: '9.x'
 
+      - name: 📦 Set version from Git tag (if exists)
+        run: |
+          VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "1.0.${{ github.run_number }}")
+          echo "Version: $VERSION"
+          sed -i "s|<Version>.*</Version>|<Version>$VERSION</Version>|g" SimpleService.Contracts/SimpleService.Contracts.csproj
+        continue-on-error: true
+
+      - name: 📦 Build and Pack NuGet package
+        run: |
+          dotnet pack SimpleService.Contracts/SimpleService.Contracts.csproj -c Release -o out
+
+      - name: 🚀 Publish NuGet package
+        run: |
+          dotnet nuget push out/*.nupkg --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+
       - name: Build with dotnet
         run: dotnet build --configuration Release
 

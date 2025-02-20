@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>SimpleService.Contracts</PackageId>
+    <Authors>Abraham Lipa Calabilla</Authors>
+    <Company>IDS Latm</Company>
+    <Description>Contrato de DTOs, Commands y Queries</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/SimpleService/SimpleService.Contracts</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\SimpleService.Application\Dtos\**\*Dto.cs" Link="Dtos\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="..\SimpleService.Application\Commands\**\*Command.cs" Link="Commands\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="..\SimpleService.Application\Queries\**\*Query.cs" Link="Queries\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>
