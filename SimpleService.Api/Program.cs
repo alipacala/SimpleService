@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using SimpleService.Application.Common.Interfaces.Services;
-using SimpleService.Application.Services;
 using SimpleService.Infrastructure.Data;
 using Wolverine;
 using Wolverine.EntityFrameworkCore;
