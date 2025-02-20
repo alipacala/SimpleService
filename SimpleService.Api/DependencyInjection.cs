@@ -1,5 +1,6 @@
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using SimpleService.Api.Endpoints;
 using SimpleService.Application.Common.Interfaces.Services;
 using SimpleService.Application.Services;
 
@@ -14,35 +15,18 @@ public static class DependencyInjection
   }
 
   public static IServiceCollection AddEndpoints(
-    this IServiceCollection services,
-    Assembly assembly)
+    this IServiceCollection services)
   {
-    ServiceDescriptor[] serviceDescriptors = assembly
-        .DefinedTypes
-        .Where(type => type is { IsAbstract: false, IsInterface: false } &&
-                       type.IsAssignableTo(typeof(IEndpoint)))
-        .Select(type => ServiceDescriptor.Transient(typeof(IEndpoint), type))
-        .ToArray();
-
-    services.TryAddEnumerable(serviceDescriptors);
+    services.AddTransient<IEndpoint, PersonaEndpoints>();
 
     return services;
   }
 
   public static IApplicationBuilder MapEndpoints(
-    this WebApplication app,
-    RouteGroupBuilder? routeGroupBuilder = null)
+    this WebApplication app)
   {
-    IEnumerable<IEndpoint> endpoints = app.Services
-        .GetRequiredService<IEnumerable<IEndpoint>>();
-
-    IEndpointRouteBuilder builder =
-        routeGroupBuilder is null ? app : routeGroupBuilder;
-
-    foreach (IEndpoint endpoint in endpoints)
-    {
-      endpoint.MapEndpoints(builder);
-    }
+    var personaEndpoints = app.Services.GetRequiredService<PersonaEndpoints>();
+    personaEndpoints.MapEndpoints(app);
 
     return app;
   }
