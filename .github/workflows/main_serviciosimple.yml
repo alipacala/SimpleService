@@ -22,9 +22,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.x'
-          
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+
+      - name: 🏗 Build Contracts Library
+        run: dotnet build SimpleService.Contracts/SimpleService.Contracts.csproj -c Release
 
       - name: 📦 Set version from Git tag (if exists)
         run: |
@@ -42,6 +42,9 @@ jobs:
           dotnet nuget push out/*.nupkg --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
