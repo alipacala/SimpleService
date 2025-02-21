@@ -7,10 +7,10 @@
   <ItemGroup>
     <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.7.3">
+    <!-- <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.7.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    </PackageReference> -->
     <PackageReference Include="Reinforced.Typings" Version="1.6.5" />
   </ItemGroup>
 
