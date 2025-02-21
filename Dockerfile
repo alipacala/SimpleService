@@ -2,6 +2,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
 
+# Instala Node.js dentro del contenedor
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
+
 # Copiar archivos de la solución y restaurar dependencias
 COPY *.sln ./
 COPY SimpleService.Api/*.csproj SimpleService.Api/
