@@ -1,0 +1,16 @@
+{
+  "name": "generated-ts-types",
+  "version": "1.0.0",
+  "description": "Interfaces generadas con Reinforced.Typings",
+  "main": "index.js",
+  "types": "generated.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "author": "Abraham Lipa Calabilla",
+  "license": "MIT"
+}
