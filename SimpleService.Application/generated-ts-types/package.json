@@ -4,8 +4,15 @@
   "description": "Interfaces generadas con Reinforced.Typings",
   "main": "index.js",
   "types": "generated.d.ts",
+  "exports": {
+    ".": {
+      "types": "./generated.d.ts",
+      "import": "./generated.js"
+    }
+  },
   "files": [
-    "dist"
+    "generated.js",
+    "generated.d.ts"
   ],
   "scripts": {
     "build": "tsc",
