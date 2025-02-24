@@ -34,13 +34,15 @@ jobs:
 
   publish-nuget:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '9.x' ]
     needs: build-and-push
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
+
+      - name: Configurar .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x'
 
       - name: Build Contracts Library
         run: dotnet build SimpleService.Contracts/SimpleService.Contracts.csproj -c Release
