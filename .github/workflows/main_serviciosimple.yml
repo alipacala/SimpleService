@@ -95,24 +95,6 @@ jobs:
         run: npm run build
         working-directory: SimpleService.Application/generated-ts-types
 
-      - name: Configurar Git para commit automático
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/alipacala/SimpleService.git
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Incrementar versión automáticamente
-        run: npm version patch -m "Bump version to %s [skip ci]"
-        working-directory: SimpleService.Application/generated-ts-types
-
-      - name: Push de la nueva versión
-        run: git push --follow-tags
-        working-directory: SimpleService.Application/generated-ts-types
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Publicar en npm
         run: npm publish --access public
         working-directory: SimpleService.Application/generated-ts-types
