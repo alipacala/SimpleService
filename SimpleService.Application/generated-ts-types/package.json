@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Interfaces generadas con Reinforced.Typings",
   "main": "index.js",
-  "types": "generated.ts",
+  "types": "generated.d.ts",
   "files": [
     "dist"
   ],
