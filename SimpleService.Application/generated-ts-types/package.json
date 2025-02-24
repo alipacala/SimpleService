@@ -1,7 +1,7 @@
 {
   "name": "generated-ts-types",
   "description": "Interfaces generadas con Reinforced.Typings",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "index.js",
   "files": [
     "dist"
