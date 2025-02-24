@@ -73,6 +73,14 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v4
 
+      - name: Configurar .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x'
+
+      - name: Build Application Library
+        run: dotnet build SimpleService.Application/SimpleService.Application.csproj -c Release
+
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
