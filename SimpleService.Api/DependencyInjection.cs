@@ -10,24 +10,27 @@ public static class DependencyInjection
   public static IServiceCollection AddApplicationServices(this IServiceCollection services)
   {
     services.AddScoped<IPersonaService, PersonaService>();
-
     return services;
   }
 
-  public static IServiceCollection AddEndpoints(
-    this IServiceCollection services)
+  public static IServiceCollection AddEndpoints(this IServiceCollection services)
   {
-    services.AddTransient<IEndpoint, PersonaEndpoints>();
-
+    services.Scan(scan => scan
+        .FromAssemblies(Assembly.GetExecutingAssembly())
+        .AddClasses(classes => classes.AssignableTo<IEndpoint>())
+        .AsImplementedInterfaces()
+        .WithTransientLifetime()
+    );
     return services;
   }
 
-  public static IApplicationBuilder MapEndpoints(
-    this WebApplication app)
+  public static WebApplication MapEndpoints(this WebApplication app)
   {
-    var personaEndpoints = app.Services.GetRequiredService<PersonaEndpoints>();
-    personaEndpoints.MapEndpoints(app);
-
+    var endpoints = app.Services.GetServices<IEndpoint>();
+    foreach (var endpoint in endpoints)
+    {
+      endpoint.MapEndpoint(app);
+    }
     return app;
   }
 }

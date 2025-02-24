@@ -1,7 +1,5 @@
-using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using SimpleService.Application.Commands.Persona;
-using SimpleService.Application.Common.Interfaces.Services;
 using SimpleService.Application.Dtos.Persona;
 using SimpleService.Application.Queries.Persona;
 using SimpleService.Domain.Entities;
@@ -10,7 +8,7 @@ using Wolverine;
 namespace SimpleService.Api.Endpoints;
 public class PersonaEndpoints : IEndpoint
 {
-    public void MapEndpoints(IEndpointRouteBuilder app)
+    public void MapEndpoint(IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("/api/personas");
 
