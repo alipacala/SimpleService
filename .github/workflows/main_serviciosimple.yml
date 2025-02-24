@@ -62,7 +62,7 @@ jobs:
     needs: build-and-push
     defaults:
       run:
-        working-directory: SimpleService.Application/TSTypesGenerated
+        working-directory: SimpleService.Application/generated-ts-types
 
     steps:
       - name: Checkout código
