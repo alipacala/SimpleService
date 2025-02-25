@@ -1,0 +1,8 @@
+# flyctl launch added from .gitignore
+**/bin
+**/obj
+**/front
+
+# flyctl launch added from SimpleService.Application/generated-ts-types/.gitignore
+SimpleService.Application/generated-ts-types/**/generated*
+fly.toml
